@@ -16,7 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="box box-info">
             <div class="box-header with-border">
+              <?php if (Yii::$app->user->Can('librarian')){?>
           <?= Html::a('Create Book', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php }?>
+        <?php if (Yii::$app->user->Can('student')){?>
+    <?= Html::a('Borrow', ['Borrow'], ['class' => 'btn btn-success']) ?>
+  <?php }?>
               <div style="text-align: center;">
                   <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
               </div>
@@ -33,16 +38,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filterModel' => $searchModel,
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
-            
+
                         'bookId',
                         'bookName',
                         'referenceNo',
                         'publisher',
-            
+                        'status',
+
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
                 ]); ?>
             </div>
             <!-- /.box-body -->
           </div>
-

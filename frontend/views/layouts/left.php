@@ -25,6 +25,7 @@
             </div>
         </form>
         <!-- /.search form -->
+        <?php if(Yii::$app->User->can('librarian')){?>
 
         <?= dmstr\widgets\Menu::widget(
             [
@@ -67,7 +68,21 @@
                 ],
             ]
         ) ?>
+      <?php }?>
+      <?php if(Yii::$app->user->can('student')){?>
+            <?= dmstr\widgets\Menu::widget(
+                [
+                    'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
+                    'items' => [
+                        ['label' => 'DASHBOARD', 'icon' => 'home', 'url' => ['/site/index']],
+                        ['label' => 'CATALOG', 'icon' => 'book', 'url' => ['/book/index']],
+                    ],
+                ]
+            ) ?>
+    <?php }?>
+        </section>
+    </aside>
 
-    </section>
+
 
 </aside>

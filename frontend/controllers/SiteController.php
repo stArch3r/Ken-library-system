@@ -72,14 +72,14 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
-    {
-         if (Yii::$app->user->isGuest) {
-            return $this->redirect('site/login');
-        } 
-        
-        return $this->render('index');
-    }
+     public function actionIndex()
+     {
+          if (Yii::$app->user->isGuest) {
+             return $this->redirect(['site/login']);
+         }
+
+         return $this->redirect(['borrowedbook/index']);
+     }
 
     /**
      * Logs in a user.

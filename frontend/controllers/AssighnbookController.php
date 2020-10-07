@@ -21,7 +21,7 @@ return $this->redirect(['site/index']);
 
 };
 
-        return $this->renderAjax('assignbook', [
+        return $this->renderAjax('assignhbook', [
             'model' => $model,
         ]);
     }

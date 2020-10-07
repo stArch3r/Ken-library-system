@@ -11,9 +11,10 @@ use Yii;
  * @property string $bookName
  * @property string $referenceNo
  * @property string $publisher
+ * @property int $status 0 available 1 issued 2 pending  
  *
- * @property BookAuthor[] $bookAuthors
- * @property BorrowedBook[] $borrowedBooks
+ * @property Bookauthor[] $bookauthors
+ * @property Borrowedbook[] $borrowedbooks
  */
 class Book extends \yii\db\ActiveRecord
 {
@@ -32,6 +33,7 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             [['bookName', 'referenceNo', 'publisher'], 'required'],
+            [['status'], 'integer'],
             [['bookName'], 'string', 'max' => 100],
             [['referenceNo', 'publisher'], 'string', 'max' => 50],
         ];
@@ -47,26 +49,27 @@ class Book extends \yii\db\ActiveRecord
             'bookName' => 'Book Name',
             'referenceNo' => 'Reference No',
             'publisher' => 'Publisher',
+            'status' => 'Status',
         ];
     }
 
     /**
-     * Gets query for [[BookAuthors]].
+     * Gets query for [[Bookauthors]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBookAuthors()
+    public function getBookauthors()
     {
-        return $this->hasMany(BookAuthor::className(), ['bookId' => 'bookId']);
+        return $this->hasMany(Bookauthor::className(), ['bookId' => 'bookId']);
     }
 
     /**
-     * Gets query for [[BorrowedBooks]].
+     * Gets query for [[Borrowedbooks]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBorrowedBooks()
+    public function getBorrowedbooks()
     {
-        return $this->hasMany(BorrowedBook::className(), ['bookId' => 'bookId']);
+        return $this->hasMany(Borrowedbook::className(), ['bookId' => 'bookId']);
     }
 }
