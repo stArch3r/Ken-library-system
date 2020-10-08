@@ -74,7 +74,26 @@ class BorrowedbookController extends Controller
              'model' => $model,
          ]);
      }
-    
+
+
+     public function actionBorrowbook()
+     {
+         $model = new \frontend\models\BorrowedBook();
+
+         if ($model->load(Yii::$app->request->post())) {
+
+           if($this->bookUpdate($model->bookId)){
+                   return $this->redirect(['index']);
+                 // form inputs are valid, do something here
+                 return;
+             }
+         }
+
+         return $this->renderAjax('borrowbook', [
+             'model' => $model,
+         ]);
+     }
+
 
      public function bookUpdate($bookId){
          $command = \Yii::$app->db->createCommand('UPDATE book SET status=1 WHERE bookId='.$bookId);
@@ -131,11 +150,11 @@ class BorrowedbookController extends Controller
 
         return $this->redirect(['index']);
     }
-    public function UpdateAfterDelete($bookId){
-           $command = \Yii::$app->db->createCommand('UPDATE book SET status=0 WHERE bookId='.$bookId);
-           $command->execute();
-           return true;
-       }
+    public function updateAfterDelete($bookId){
+          $command = \Yii::$app->db->createCommand('UPDATE book SET status=0 WHERE bookId='.$bookId);
+          $command->execute();
+          return true;
+      }
     /**
      * Finds the Borrowedbook model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

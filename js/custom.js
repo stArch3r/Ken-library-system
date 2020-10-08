@@ -14,17 +14,17 @@ $(document).ready(function() {
 			e.preventDefault();
 			var id = $(this).attr("val");
        $.get('returnbook?id='+id,function(data){
-			$('returnbook').modal('show')
-		 		.find('returnbookContent')
+			$('#returnbook').modal('show')
+		 		.find('#returnbookContent')
 			//.load($(this).attr('value'));
 		 		.html(data);
         });
 	});
-	$('.borrow').click(function(e){
+	$('.borrowbook').click(function(e){
 			e.preventDefault();
-			 $.get('borrow',function(data){
-			$('#borrow').modal('show')
-				.find('#borrowContent')
+			 $.get('borrowbook',function(data){
+			$('#borrowbook').modal('show')
+				.find('#borrowbookContent')
 				.html(data);
 				});
 	});

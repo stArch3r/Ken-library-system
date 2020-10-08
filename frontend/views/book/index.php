@@ -2,7 +2,10 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\bootstrap\Modal;
+use frontend\models\Book;
+use frontend\models\Student;
+use frontend\models\Borrowedbook;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\BookSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -20,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
           <?= Html::a('Create Book', ['create'], ['class' => 'btn btn-success']) ?>
         <?php }?>
         <?php if (Yii::$app->user->Can('student')){?>
-    <?= Html::a('Borrow', ['Borrow'], ['class' => 'btn btn-success']) ?>
+    <button type="button" class="btn btn-primary borrowbook" aria-controls="example1"><span class="fa fa-plus">borrow book </span></button>
   <?php }?>
               <div style="text-align: center;">
                   <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
@@ -51,3 +54,12 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <!-- /.box-body -->
           </div>
+          <?php
+            Modal::begin([
+                'header'=>'<h4>Borrow Book</h4>',
+                'id'=>'borrowbook',
+                'size'=>'modal-md'
+                ]);
+            echo "<div id='borrowbookContent'></div>";
+            Modal::end();
+          ?>
