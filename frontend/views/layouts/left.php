@@ -87,6 +87,7 @@
                   'items' => [
                       ['label' => 'DASHBOARD', 'icon' => 'home', 'url' => ['/site/index']],
                       ['label' => 'CATALOG', 'icon' => 'book', 'url' => ['/book/index']],
+                      ['label' => 'STUDENTS', 'icon' => 'users', 'url' => ['/student/index']],
                   ],
               ]
           ) ?>
