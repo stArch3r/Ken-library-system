@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 $books = ArrayHelper::map(Book::find()->where(['status'=>0])->all(), 'bookId', 'bookName');
 $students = ArrayHelper::map(Student::find()->all(), 'studentsId', 'fullName');?>
 <div class="borrowbook">
-    <?php $form = ActiveForm::begin(['id'=>'borrowbook']); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
 
         <?= $form->field($model, 'studentId')->dropDownList($students) ?>

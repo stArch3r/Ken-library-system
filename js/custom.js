@@ -31,13 +31,22 @@ $(document).ready(function() {
 	$('.borrowbook').click(function(e){
 			e.preventDefault();
 			var id = $(this).attr("val");
+			alert(id);
 	       $.get('borrowbook?id='+id,function(data){
 				$('#borrowbook').modal('show')
 			 		.find('#borrowbookContent')
 			 		.html(data);
         });
 		});
-
+		$('.swift').click(function(e){
+				e.preventDefault();
+				var link= $(this).attr("val");
+		       $.get(link,function(data){
+					$('#swift').modal('show')
+				 		.find('#swiftContent')
+				 		.html(data);
+	        });
+			});
 
 	$('.addauthor').click(function(e){
 			e.preventDefault();

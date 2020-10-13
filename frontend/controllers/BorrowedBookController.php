@@ -91,11 +91,14 @@ class BorrowedbookController extends Controller
                'model' => $model,
            ]);
        }
+
    public function afterBorrowbook($bookId){
            $command = \Yii::$app->db->createCommand('UPDATE book SET status=2 WHERE bookId='.$bookId);
            $command->execute();
            return true;
        }
+
+
 
      public function bookUpdate($bookId){
          $command = \Yii::$app->db->createCommand('UPDATE book SET status=1 WHERE bookId='.$bookId);
