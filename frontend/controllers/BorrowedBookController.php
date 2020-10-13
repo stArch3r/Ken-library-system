@@ -77,23 +77,25 @@ class BorrowedbookController extends Controller
 
 
      public function actionBorrowbook()
-     {
-         $model = new \frontend\models\BorrowedBook();
+       {
 
-         if ($model->load(Yii::$app->request->post())) {
-
-           if($this->bookUpdate($model->bookId)){
-                   return $this->redirect(['index']);
-                 // form inputs are valid, do something here
-                 return;
-             }
-         }
-
-         return $this->renderAjax('borrowbook', [
-             'model' => $model,
-         ]);
-     }
-
+           $model = new Borrowedbook();
+           var_dump(Yii::$app->request->post());
+           if ($model->load(Yii::$app->request->post()) && $model->save())
+           {
+               $this->afterBorrowbook($model->bookId);
+               // form inputs are valid, do something here
+               return $this->redirect(['index']);
+           }
+           return $this->renderAjax('borrowbook', [
+               'model' => $model,
+           ]);
+       }
+   public function afterBorrowbook($bookId){
+           $command = \Yii::$app->db->createCommand('UPDATE book SET status=2 WHERE bookId='.$bookId);
+           $command->execute();
+           return true;
+       }
 
      public function bookUpdate($bookId){
          $command = \Yii::$app->db->createCommand('UPDATE book SET status=1 WHERE bookId='.$bookId);
@@ -114,6 +116,7 @@ class BorrowedbookController extends Controller
                'model'=>$model,
            ]);
        }
+
     /**
      * Updates an existing Borrowedbook model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -134,6 +137,11 @@ class BorrowedbookController extends Controller
         ]);
     }
 
+    public function actionApprove($id,$studentId){
+         $command = \Yii::$app->db->createCommand('UPDATE book SET status=1 WHERE bookId='.$id);
+         $command->execute();
+         return $this->redirect(['index']);
+}
     /**
      * Deletes an existing Borrowedbook model.s
      * If deletion is successful, the browser will be redirected to the 'index' page.

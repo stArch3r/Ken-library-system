@@ -20,14 +20,23 @@ $(document).ready(function() {
 		 		.html(data);
         });
 	});
+	$('.approvebook').click(function(e){
+			e.preventDefault();
+       $.get('approvebook',function(data){
+			$('#approvebook').modal('show')
+		 		.find('#approvebookContent')
+		 		.html(data);
+        });
+	});
 	$('.borrowbook').click(function(e){
 			e.preventDefault();
-			 $.get('borrowbook',function(data){
-			$('#borrowbook').modal('show')
-				.find('#borrowbookContent')
-				.html(data);
-				});
-	});
+			var id = $(this).attr("val");
+	       $.get('borrowbook?id='+id,function(data){
+				$('#borrowbook').modal('show')
+			 		.find('#borrowbookContent')
+			 		.html(data);
+        });
+		});
 
 
 	$('.addauthor').click(function(e){
